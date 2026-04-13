@@ -1,4 +1,4 @@
-# tire-fleet-telemetry-pipeline
+# Tire Fleet Telemtry Pipeline - Hypothetical Business Use Case
 
 A comprehensive **data engineering case study** demonstrating end-to-end telemetry pipeline design: from raw sensor ingestion through quality validation, business analytics, and warehouse modeling.
 
