@@ -207,3 +207,4 @@ marimo/_lsp/
 __marimo__/
 pdf_content.txt
 sent_files/data_for_mileage_ingestion.parquet
+sent_files/CaseStudy_DataEngineering.pdf
