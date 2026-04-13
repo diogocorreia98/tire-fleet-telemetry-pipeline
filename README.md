@@ -1,6 +1,6 @@
 # tire-fleet-telemetry-pipeline
 
-A comprehensive **data engineering case study** demonstrating end-to-end telemetry pipeline design: from raw sensor ingestion through quality validation, business analytics, warehouse modeling, to production-grade code patterns.
+A comprehensive **data engineering case study** demonstrating end-to-end telemetry pipeline design: from raw sensor ingestion through quality validation, business analytics, and warehouse modeling.
 
 **Dataset**: 16.8M+ tire mileage events across 4 months (September 2025 focus: 3.1M records)  
 **Result**: 50.8K clean daily aggregates | 108K quality violations detected | 1,133 vehicles | 4,240 tires
@@ -9,7 +9,7 @@ A comprehensive **data engineering case study** demonstrating end-to-end telemet
 
 ## Project Overview
 
-This repository contains a **complete case study notebook** addressing four critical data engineering domains:
+This repository contains a **complete case study notebook** addressing three critical data engineering domains:
 
 ### **Q1: Data Ingestion & Quality Validation**
 - Loaded 3.1M September telemetry records
@@ -56,26 +56,6 @@ This repository contains a **complete case study notebook** addressing four crit
   - ✓ SCD Type 2 for complete mounting history
   - ✓ Audit columns for 100% lineage traceability
 
-### **Q4: Production Code Snippet**
-- **TelemetryQualityValidator**: Reusable PySpark class for quality checks
-  - `check_duplicates()`: Window function approach (efficient)
-  - `check_monotonicity()`: LAG-based cumulative counter validation
-  - `check_nulls()`: Required field validation
-  - `add_quality_flags()`: Non-destructive marking (data retained for investigation)
-  
-- **ReprocessableTelemetryPipeline**: Idempotent orchestration pattern
-  - Load → Validate → Flag → Write (with pipeline_run_id partition)
-  - Safe restart capability (no orphaned data)
-  - Comprehensive error handling & logging
-  
-- **Production Features**:
-  - ✓ Scalable to billion-row datasets
-  - ✓ Audit trail generation (QualityCheckResult records)
-  - ✓ Extensible for new business rules
-  - ✓ Compliance-ready (complete lineage)
-
----
-
 ## Key Findings
 
 | Metric | Finding |
@@ -93,7 +73,7 @@ This repository contains a **complete case study notebook** addressing four crit
 ## Technology Stack
 
 - **Language**: Python 3.13
-- **Data Processing**: Pandas (analysis), PySpark (production code examples)
+- **Data Processing**: Pandas
 - **Jupyter**: Interactive notebook environment
 - **Parquet**: Columnar data format (efficient storage/querying)
 
@@ -114,7 +94,7 @@ tire-fleet-telemetry-pipeline/
 
 ---
 
-## 🚀 How to Use
+## How to Use
 
 ### Prerequisites
 ```bash
@@ -130,8 +110,7 @@ jupyter notebook "Case Study Notebook.ipynb"
 - **Cell 1-5**: Q1 - Data Quality Analysis (executable steps)
 - **Cell 8**: Q2 - Business Analytics (fleet insights)
 - **Cell 11**: Q3 - Warehouse Design (schema definitions)
-- **Cell 14**: Q4 - Production Code (reusable framework)
-- **Cell 16**: Summary & Recommendations
+- **Cell 14**: Summary & Recommendations
 
 Each section executes independently and produces detailed tables & metrics.
 
@@ -150,7 +129,7 @@ Each section executes independently and produces detailed tables & metrics.
 ## Production Recommendations
 
 1. **Implement the warehouse schema** (Q3) to support 12+ months of historical analysis
-2. **Deploy quality framework** (Q4) with automated alerting on violation trends
+2. **Deploy automated quality monitoring** with alerting on violation trends
 3. **Real-time inactivity monitoring**: Alert when vehicles reach 7-day inactive threshold
 4. **Establish SLOs**: Target <4 hour latency from sensor to warehouse
 5. **Monitor quality metrics** daily: Track duplicate rate, violation trends, data freshness
@@ -159,7 +138,7 @@ Each section executes independently and produces detailed tables & metrics.
 
 ## Scalability Considerations
 
-- **Data Volume**: Framework tested with 3.1M records; scales to billions with PySpark partitioning
+- **Data Volume**: Framework tested with 3.1M records; warehouse design supports continued growth at larger scales
 - **Warehouse Retention**: 5-year rolling window (~50GB compressed with daily aggregation)
 - **Query Performance**: <2 sec for daily fleet aggregations; <10 sec for 5-year history scans
 - **Concurrent Users**: Designed for 100+ analysts via BI dashboards + API access
